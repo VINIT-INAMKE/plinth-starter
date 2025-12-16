@@ -197,6 +197,8 @@ const scriptAddress = resolvePlutusScriptAddress(script, 0);
 
 ## Commands
 
+> **Note**: All `make` commands must be run inside the `nix develop` shell.
+
 | Command | Description |
 |---------|-------------|
 | `make build` | Build all contracts |
