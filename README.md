@@ -2,6 +2,30 @@
 
 A minimal Plutus V3 smart contract template for Cardano development using [Plinth](https://github.com/IntersectMBO/plinth-template).
 
+## Use This Template
+
+### Option 1: GitHub Template (Recommended)
+
+Click **"Use this template"** button on GitHub, or:
+
+```bash
+gh repo create my-contract --template VINIT-INAMKE/plinth-starter --public --clone
+cd my-contract
+```
+
+### Option 2: Clone Directly
+
+```bash
+git clone https://github.com/VINIT-INAMKE/plinth-starter.git my-contract
+cd my-contract
+rm -rf .git
+git init
+git add .
+git commit -m "Initial commit from plinth-starter template"
+```
+
+---
+
 ## Quick Start
 
 ```bash
