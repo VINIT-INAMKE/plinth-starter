@@ -19,6 +19,57 @@ Your blueprint will be at `blueprints/contract.json`.
 
 ---
 
+## Nix Setup
+
+### 1. Install Nix (Multi-user)
+
+```bash
+sh <(curl -L https://nixos.org/nix/install) --daemon
+```
+
+### 2. Enable Flakes
+
+Add to `/etc/nix/nix.conf` (create if doesn't exist):
+
+```
+experimental-features = nix-command flakes
+```
+
+### 3. Add Yourself as Trusted User
+
+Append to `/etc/nix/nix.conf`:
+
+```bash
+# Replace 'yourusername' with output of `whoami`
+trusted-users = yourusername root
+```
+
+### 4. Configure IOG Binary Cache
+
+Append to `/etc/nix/nix.conf`:
+
+```
+extra-substituters = https://cache.iog.io
+extra-trusted-public-keys = hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=
+```
+
+### 5. Restart Nix Daemon
+
+```bash
+sudo systemctl restart nix-daemon.service
+```
+
+### 6. Verify Setup
+
+```bash
+nix develop
+# Accept flake config prompts with 'y'
+```
+
+> **Note**: First run will download dependencies. If you see `"warning: ignoring untrusted substituter"`, your trusted-users config isn't working. Restart the daemon and try again.
+
+---
+
 ## Project Structure
 
 ```
@@ -102,13 +153,6 @@ const scriptAddress = resolvePlutusScriptAddress(script, 0);
 | `make format` | Format Haskell code |
 | `make lint` | Run HLint |
 | `make shell` | Enter nix shell |
-
----
-
-## Requirements
-
-- [Nix](https://nixos.org/download.html) with flakes enabled
-- See [IOG Nix Setup Guide](https://github.com/input-output-hk/iogx/blob/main/doc/nix-setup-guide.md)
 
 ---
 
