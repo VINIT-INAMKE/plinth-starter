@@ -26,6 +26,34 @@ git commit -m "Initial commit from plinth-starter template"
 
 ---
 
+## Customize for Your Project
+
+After cloning, rename the project:
+
+1. **Rename cabal file:**
+   ```bash
+   mv smartcontracts.cabal my-project.cabal
+   ```
+
+2. **Update package name** in `my-project.cabal`:
+   ```
+   name:            my-project
+   description:     My Cardano smart contract
+   ```
+
+3. **Update flake description** in `flake.nix`:
+   ```nix
+   description = "My Cardano Smart Contract";
+   ```
+
+4. **Update blueprint metadata** in `app/GenBlueprint.hs`:
+   ```haskell
+   contractId = Just "my-project"
+   preambleTitle = "My Smart Contract"
+   ```
+
+---
+
 ## Quick Start
 
 ```bash
