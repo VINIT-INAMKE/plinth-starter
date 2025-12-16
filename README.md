@@ -53,24 +53,6 @@ After cloning, rename the project:
    ```
 
 ---
-
-## Quick Start
-
-```bash
-# Enter development shell
-nix develop
-
-# Build contracts
-make build
-
-# Generate blueprint
-make blueprint
-```
-
-Your blueprint will be at `blueprints/contract.json`.
-
----
-
 ## Nix Setup
 
 ### 1. Install Nix (Multi-user)
@@ -121,6 +103,24 @@ nix develop
 > **Note**: First run will download dependencies. If you see `"warning: ignoring untrusted substituter"`, your trusted-users config isn't working. Restart the daemon and try again.
 
 ---
+
+## Quick Start
+
+```bash
+# Enter development shell
+nix develop
+
+# Build contracts
+make build
+
+# Generate blueprint
+make blueprint
+```
+
+Your blueprint will be at `blueprints/contract.json`.
+
+---
+
 
 ## Project Structure
 
