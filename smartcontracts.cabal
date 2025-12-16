@@ -1,0 +1,85 @@
+cabal-version:   3.0
+name:            smartcontracts
+version:         0.1.0.0
+license:         Apache-2.0
+build-type:      Simple
+description:     Cardano Plutus V3 Smart Contract Template
+
+-- Common GHC options for both on-chain and off-chain code
+common ghc-options
+  ghc-options:        -Wall
+  default-language:   Haskell2010
+  default-extensions:
+    DataKinds
+    DeriveAnyClass
+    DeriveGeneric
+    DerivingStrategies
+    FlexibleContexts
+    FlexibleInstances
+    GeneralizedNewtypeDeriving
+    ImportQualifiedPost
+    LambdaCase
+    MultiParamTypeClasses
+    NumericUnderscores
+    OverloadedStrings
+    PatternSynonyms
+    RecordWildCards
+    ScopedTypeVariables
+    StandaloneDeriving
+    Strict
+    TemplateHaskell
+    TypeApplications
+    UndecidableInstances
+    ViewPatterns
+
+-- GHC-only options (not supported by Plinth)
+common ghc-only-options
+  import:             ghc-options
+  default-extensions: GADTs
+
+-- Options required for Plinth/on-chain compilation
+common plinth-options
+  import:      ghc-options
+  ghc-options:
+    -fobject-code -fno-full-laziness -fno-ignore-interface-pragmas
+    -fno-omit-interface-pragmas -fno-spec-constr -fno-specialise
+    -fno-strictness -fno-unbox-small-strict-fields
+    -fno-unbox-strict-fields -fplugin-opt
+    PlutusTx.Plugin:target-version=1.1.0
+
+-- Plutus dependencies
+common plutus-deps
+  build-depends:
+    , plutus-core ^>=1.56.0.0
+    , plutus-ledger-api ^>=1.56.0.0
+    , plutus-tx ^>=1.56.0.0
+    , plutus-tx-plugin ^>=1.56.0.0
+
+--------------------------------------------------------------------------------
+-- LIBRARY: Your validators go here
+--------------------------------------------------------------------------------
+
+library
+  import:          plinth-options, plutus-deps
+  hs-source-dirs:  src
+  build-depends:   base
+  exposed-modules:
+    Validator
+    -- Add more validators here:
+    -- MyMintingPolicy
+    -- MyOtherValidator
+
+--------------------------------------------------------------------------------
+-- EXECUTABLE: Blueprint generator
+--------------------------------------------------------------------------------
+
+executable gen-blueprint
+  import:         ghc-only-options, plutus-deps
+  hs-source-dirs: app
+  main-is:        GenBlueprint.hs
+  build-depends:
+    , base
+    , bytestring
+    , containers
+    , directory
+    , smartcontracts
